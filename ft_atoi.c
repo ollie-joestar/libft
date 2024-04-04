@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:50:46 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/04 15:15:54 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:24:40 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_atoi(char *str)
 		num = num * 10 + sign * (str[i++] - '0');
 	return (num);
 }
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -47,4 +47,4 @@ int main(int argc, char **argv)
     }
     else
         return (1);
-}
+}*/
