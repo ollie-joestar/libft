@@ -6,21 +6,11 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:51:44 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/04 15:04:19 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:07:13 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-static int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 static int	ft_calc(int n)
 {
@@ -32,7 +22,7 @@ static int	ft_calc(int n)
 	while (n > 9 || n < -9)
 	{
 		i++;
-		n / = 10;
+		n = n / 10;
 	}
 	return (i);
 }
@@ -53,11 +43,11 @@ static void	ft_putnbr(int n, char *str)
 	while (num > 0)
 	{
 		str[i++] = '0' + (num % 10);
-		num / = 10;
+		num = n / 10;
 	}
 	if (neg == 1)
 		str[i++] = '-';
-	str[i] == '\0';
+	str[i] = '\0';
 }
 
 static void	reverse(char *str)
@@ -79,7 +69,6 @@ static void	reverse(char *str)
 
 char	*ft_itoa(int n)
 {
-	int		i;
 	int		size;
 	char	*ptr;
 

@@ -6,9 +6,11 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:09:15 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/04 15:10:43 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:24:20 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -19,9 +21,9 @@ char	*ft_strrchr(const char *s, int c)
 		i++;
 	while (i >= 0)
 	{
-		if (s[i] == c)
+		if (s[i] == (const char)c)
 			return ((char *)(s + i));
 		i--;
 	}
-	return (NULL);
+	return (0);
 }

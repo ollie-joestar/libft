@@ -6,31 +6,20 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:29:12 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/04 15:03:51 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:04:17 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-size_t	check(char c, char const *set)
+static size_t	check(char c, char const *set)
 {
 	size_t	i;
 
 	i = 0;
-	while (set[i])
+	while ((unsigned char const)set[i])
 	{
-		if (set[i] == c)
+		if ((unsigned char const)set[i] == (unsigned char)c)
 			return (1);
 		i++;
 	}
