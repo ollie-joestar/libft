@@ -6,11 +6,13 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:45:45 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/09 13:33:47 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:07:08 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+//#include "ft_substr.c"
+//#include "ft_strlen.c"
 
 static size_t	ft_word_count(const char *str, char sep)
 {
@@ -26,6 +28,17 @@ static size_t	ft_word_count(const char *str, char sep)
 		i++;
 	}
 	return (words);
+}
+
+static void	*mem_free(char **list)
+{
+	size_t	i;
+
+	i = 0;
+	while (list[i])
+		free(list[i++]);
+	free(list);
+	return(NULL);	
 }
 
 static char	**ft_process(char **list, const char *s, char c)
@@ -46,6 +59,8 @@ static char	**ft_process(char **list, const char *s, char c)
 			while (s[i + j] != c)
 				j++;
 			list[word] = ft_substr(s, i, j);
+			if (list[word] == NULL)
+				return (mem_free(list));
 			i += j;
 			word++;
 		}
@@ -67,6 +82,8 @@ char	**ft_split(char const *s, char c)
 	return (list);
 }
 /*
+#include <stdio.h>
+
 int	main(int argc, char **argv)
 {
 
@@ -79,7 +96,6 @@ int	main(int argc, char **argv)
 			printf("%s\n" , result[i]);
 			i++;
 		}
-		free(result);
 		return (0);
 	}
 	else

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 14:51:44 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/09 14:07:13 by oohnivch         ###   ########.fr       */
+/*   Created: 2024/04/11 18:11:54 by oohnivch          #+#    #+#             */
+/*   Updated: 2024/04/11 18:11:57 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static void	ft_putnbr(int n, char *str)
 		neg = 1;
 	if (n == 0)
 		str[i++] = '0';
-	num = (1 - 2 * neg) * (unsigned int)n;
+	num = (1 - 2 * neg) * n;
 	while (num > 0)
 	{
 		str[i++] = '0' + (num % 10);
-		num = n / 10;
+		num /= 10;
 	}
 	if (neg == 1)
 		str[i++] = '-';
@@ -61,8 +61,8 @@ static void	reverse(char *str)
 	while (i < len / 2)
 	{
 		temp = str[i];
-		str[i] = str[len - 1 - i];
-		str[len - 1 - i] = temp;
+		str[i] = str[len - i - 1];
+		str[len - i - 1] = temp;
 		i++;
 	}
 }
@@ -73,10 +73,28 @@ char	*ft_itoa(int n)
 	char	*ptr;
 
 	size = ft_calc(n);
-	ptr = malloc ((size + 1) * sizeof(char));
+	size++;
+	ptr = malloc (size * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	ft_putnbr(n, ptr);
 	reverse(ptr);
 	return (ptr);
 }
+/*
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		int	num;
+
+		num = ft_atoi(argv[1]);
+		printf("The number given: %d\n", num);
+		printf("Space needed for it: %d\n", ft_calc(num));
+		printf("String result: %s\n", ft_itoa(num));
+//		printf("Real result: %s\n", itoa(num));
+		return (0);
+	}
+	else
+		return (1);
+}*/

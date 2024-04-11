@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:10:40 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/09 17:56:05 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:40:45 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start >= ft_strlen(s))
 	{
 		ptr = malloc (1 * sizeof(char));
-		ptr[0] = 0;
+		ptr[0] = '\0';
 		return (ptr);
 	}
 	else
