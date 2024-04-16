@@ -6,39 +6,49 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:45:45 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/11 20:07:08 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:35:59 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include "ft_substr.c"
-//#include "ft_strlen.c"
+/*#include "ft_substr.c"
+#include "ft_calloc.c"
+#include "ft_strlen.c"*/
 
 static size_t	ft_word_count(const char *str, char sep)
 {
-	int	i;
-	int	words;
+	size_t				i;
+	size_t				words;
+	unsigned char		c;
+	const unsigned char	*s;
 
+	if (!ft_strlen(str))
+		return (0);
+	s = (const unsigned char *)str;
+	c = (unsigned char)sep;
 	i = 0;
 	words = 0;
-	while (str[i])
+	while (s[i])
 	{
-		if ((str[i + 1] == sep || !(str[i + 1])) && str[i] != sep)
+		if ((s[i + 1] == c || !(s[i + 1])) && s[i] != c)
 			words++;
 		i++;
 	}
 	return (words);
 }
 
-static void	*mem_free(char **list)
+static void	*mem_free(char **list, size_t word)
 {
 	size_t	i;
 
 	i = 0;
-	while (list[i])
-		free(list[i++]);
+	while (i < word)
+	{
+		free(list[i]);
+		i++;
+	}
 	free(list);
-	return(NULL);	
+	return (NULL);
 }
 
 static char	**ft_process(char **list, const char *s, char c)
@@ -56,11 +66,11 @@ static char	**ft_process(char **list, const char *s, char c)
 		else
 		{
 			j = 0;
-			while (s[i + j] != c)
+			while (s[i + j] != c && s[i + j])
 				j++;
 			list[word] = ft_substr(s, i, j);
 			if (list[word] == NULL)
-				return (mem_free(list));
+				return (mem_free(list, word));
 			i += j;
 			word++;
 		}
@@ -73,17 +83,18 @@ char	**ft_split(char const *s, char c)
 	char	**list;
 	int		words;
 
+	if (!s)
+		return (NULL);
 	words = ft_word_count(s, c);
-	list = (char **) malloc(sizeof(char *) * (words + 1));
+	list = (char **)ft_calloc(sizeof(char *), (words + 1));
 	if (list == NULL)
 		return (NULL);
 	list = ft_process(list, s, c);
-	list[words] = 0;
+	if (list == NULL)
+		return (NULL);
 	return (list);
 }
-/*
-#include <stdio.h>
-
+/*#include <stdio.h>
 int	main(int argc, char **argv)
 {
 
@@ -91,11 +102,15 @@ int	main(int argc, char **argv)
 	{
 		int i = 0;
 		char **result = ft_split(argv[1], argv[2][0]);
+		if (!result)
+			return (1);
 		while (result[i])
 		{
 			printf("%s\n" , result[i]);
+			free(result[i]);
 			i++;
 		}
+		free(result);
 		return (0);
 	}
 	else

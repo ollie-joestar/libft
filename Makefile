@@ -6,7 +6,7 @@
 #    By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/08 13:40:55 by oohnivch          #+#    #+#              #
-#    Updated: 2024/04/09 13:58:17 by oohnivch         ###   ########.fr        #
+#    Updated: 2024/04/16 16:26:56 by oohnivch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ NAME = libft.a
 SRC = $(shell find -type f -name "*.c") 
 
 OBJ = $(SRC:%.c=%.o)
+
+bonus: all
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:44:44 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/04/11 19:21:45 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:28:32 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 	size_t	n_len;
-	
+
 	j = 0;
 	n_len = ft_strlen(little);
 	if (!(little[j]))
