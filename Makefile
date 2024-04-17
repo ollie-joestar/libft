@@ -6,7 +6,7 @@
 #    By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/08 13:40:55 by oohnivch          #+#    #+#              #
-#    Updated: 2024/04/17 15:20:14 by oohnivch         ###   ########.fr        #
+#    Updated: 2024/04/17 16:47:35 by oohnivch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #									Variables								   #
@@ -20,11 +20,9 @@ AR = ar rcs
 
 NORMAL = \033[0m
 GREEN = \033[1;32m
-BLUE = \033[0;34m
 PURPLE = \033[1;35m
 RED = \033[0;31m
 YELLOW = \033[0;33m
-
 
 # **************************************************************************** #
 #									Source Files							   #
@@ -59,37 +57,42 @@ all: $(NAME)
 
 bonus: $(OBJ) $(BOBJ)
 	@$(AR) $(NAME) $(OBJ) $(BOBJ)
-	@echo "$(PURPLE)$(NAME) with BONUS Created!$(NORMAL)"
+	@echo "\n$(PURPLE)******** $(NAME) with BONUS Created! ********$(NORMAL)\n"
 
 $(NAME): $(OBJ)
 	@$(AR) $@ $(OBJ)
-	@echo "$(GREEN)$(NAME) Created!$(NORMAL)"
+	@echo "\n$(GREEN)******** $(NAME) Created! ********$(NORMAL)\n"
 
 %_bonus.o: %_bonus.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADER)
-	@echo "$(YELLOW)$<	$(BLUE)$@ $(NORMAL)"
+	@if ! $(CC) $(CFLAGS) -c $< -o $@ $(HEADER) 2> error.txt; then\
+		echo "$(RED)!!!!!!!! ERROR !!!!!!!!$(NORMAL)"; \
+		echo "$(YELLOW)Error caused by $<$(NORMAL)\n"; \
+		sed '$$d' error.txt; \
+		echo "\n$(RED)Aborting$(NORMAL)"; \
+		exit 1; \
+	fi
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADER)
-	@echo "$(YELLOW)$<		$(BLUE)$@ $(NORMAL)"
+	@if ! $(CC) $(CFLAGS) -c $< -o $@ $(HEADER) 2> error.txt; then\
+		echo "$(RED)!!!!!!!! ERROR !!!!!!!!$(NORMAL)"; \
+		echo "$(YELLOW)Error caused by $<$(NORMAL)\n"; \
+		sed '$$d' error.txt; \
+		echo "\n$(RED)Aborting makefile........$(NORMAL)"; \
+		exit 1; \
+	fi
 
 clean:
-	@rm -f $(OBJ) $(BOBJ)
-	@echo "$(RED)Deleting $(words $(OBJ) $(BOBJ)) object files $(NORMAL)"
+	@rm -f $(OBJ) $(BOBJ) error.txt
+	@echo "$(YELLOW)Deleting $(words $(OBJ) $(BOBJ)) object file(s) $(NORMAL)"
 	@echo "$(GREEN)Deletion success! $(NORMAL)"
 
 fclean: 
-	@rm -f $(OBJ) $(BOBJ) $(NAME)
-	@echo "$(RED)Deleting $(NAME) and $(words $(OBJ) $(BOBJ)) object files $(NORMAL)" 
+	@rm -f $(OBJ) $(BOBJ) $(NAME) error.txt
+	@echo "$(YELLOW)Deleting $(NAME) and $(words $(OBJ) $(BOBJ)) object file(s) $(NORMAL)" 
 	@echo "$(GREEN)Deletion success! $(NORMAL)"
 
 re: fclean all
 
 rebonus: fclean bonus
 
-joestar: sax
-
-sax:
-	@curl -L s.42l.fr/joestar | bash
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus rebonus
