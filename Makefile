@@ -6,7 +6,7 @@
 #    By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/08 13:40:55 by oohnivch          #+#    #+#              #
-#    Updated: 2024/04/17 16:47:35 by oohnivch         ###   ########.fr        #
+#    Updated: 2024/07/03 15:44:09 by oohnivch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #									Variables								   #
@@ -28,8 +28,11 @@ YELLOW = \033[0;33m
 #									Source Files							   #
 # **************************************************************************** #
 
+SRC_PATH = src/
+OBJ_PATH = obj/
+
 CSRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-	   ft_isprint.c ft_toupper.c ft_tolower.c
+	   ft_isprint.c ft_toupper.c ft_tolower.c ft_isspace.c
 
 SSRC = ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c \
 	   ft_strrchr.c ft_strncmp.c ft_strnstr.c ft_atoi.c \
@@ -45,34 +48,29 @@ BSRC = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 	   ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 	   ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-SRC = $(CSRC) $(SSRC) $(MSRC) $(FSRC)
-OBJ = $(SRC:%.c=%.o)
-BOBJ = $(BSRC:%.c=%.o)
+PSRC = ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c \
+	   ft_puthex.c ft_putptr.c ft_putuint.c
+
+GSRC = get_next_line.c get_next_line_utils.c
+
+SRC =  $(CSRC) $(SSRC) $(MSRC) $(FSRC) $(PSRC) $(GSRC) $(BSRC)
+OBJ =  $(SRC:%.c=%.o)
+OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 
 # **************************************************************************** #
 #									Rules									   #
 # **************************************************************************** #
 
-all: $(NAME)
+all: $(OBJ_PATH) $(NAME)
 
-bonus: $(OBJ) $(BOBJ)
-	@$(AR) $(NAME) $(OBJ) $(BOBJ)
-	@echo "\n$(PURPLE)******** $(NAME) with BONUS Created! ********$(NORMAL)\n"
+$(NAME): $(OBJS)
+	@$(AR) $@ $(OBJS)
+	@echo "\n$(PURPLE)******** $(NAME) Created! ********$(NORMAL)\n"
 
-$(NAME): $(OBJ)
-	@$(AR) $@ $(OBJ)
-	@echo "\n$(GREEN)******** $(NAME) Created! ********$(NORMAL)\n"
+$(OBJ_PATH):
+	@mkdir $(OBJ_PATH)
 
-%_bonus.o: %_bonus.c
-	@if ! $(CC) $(CFLAGS) -c $< -o $@ $(HEADER) 2> error.txt; then\
-		echo "$(RED)!!!!!!!! ERROR !!!!!!!!$(NORMAL)"; \
-		echo "$(YELLOW)Error caused by $<$(NORMAL)\n"; \
-		sed '$$d' error.txt; \
-		echo "\n$(RED)Aborting$(NORMAL)"; \
-		exit 1; \
-	fi
-
-%.o: %.c
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@if ! $(CC) $(CFLAGS) -c $< -o $@ $(HEADER) 2> error.txt; then\
 		echo "$(RED)!!!!!!!! ERROR !!!!!!!!$(NORMAL)"; \
 		echo "$(YELLOW)Error caused by $<$(NORMAL)\n"; \
@@ -81,14 +79,20 @@ $(NAME): $(OBJ)
 		exit 1; \
 	fi
 
+bonus: $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
+	@echo "\n$(PURPLE)******** $(NAME) with BONUS Created! ********$(NORMAL)\n"
+
 clean:
-	@rm -f $(OBJ) $(BOBJ) error.txt
-	@echo "$(YELLOW)Deleting $(words $(OBJ) $(BOBJ)) object file(s) $(NORMAL)"
+	@rm -rf $(OBJ_PATH)
+	@rm -f error.txt
+	@echo "$(YELLOW)Deleting $(words $(OBJ)) object file(s) $(NORMAL)"
 	@echo "$(GREEN)Deletion success! $(NORMAL)"
 
 fclean: 
-	@rm -f $(OBJ) $(BOBJ) $(NAME) error.txt
-	@echo "$(YELLOW)Deleting $(NAME) and $(words $(OBJ) $(BOBJ)) object file(s) $(NORMAL)" 
+	@rm -rf $(OBJ_PATH)
+	@rm -f $(NAME) error.txt
+	@echo "$(YELLOW)Deleting $(NAME) and $(words $(OBJ)) object file(s) $(NORMAL)" 
 	@echo "$(GREEN)Deletion success! $(NORMAL)"
 
 re: fclean all
