@@ -6,23 +6,11 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:00:55 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/07/03 13:10:25 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:43:33 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-
-size_t	ft_strlen(char const *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (i);
-	while (s[i])
-		i++;
-	return (i);
-}
 
 size_t	ft_nlcheck(char const *s)
 {
