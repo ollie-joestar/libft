@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 14:59:31 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/07/03 13:06:19 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/09/11 19:27:54 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,18 @@ char	*ft_move_buffer(char **old, size_t start, size_t len)
 	return (new);
 }
 
-char	*ft_parseline(char **buffer)
+char	*ft_parseline(char **buffer, int *errno)
 {
 	size_t			i;
 	size_t			len;
 	unsigned char	*cont;
 
 	if (!(*buffer) || !(*buffer[0]))
-		return (NULL);
+		return (*errno = -1, NULL);
 	len = ft_linelen(*buffer);
 	cont = ft_calloc(len + 1, sizeof(char));
 	if (!cont)
-		return (ft_free(buffer), NULL);
+		return (*errno = -1, ft_free(buffer), NULL);
 	i = 0;
 	while (i < len)
 	{
@@ -89,14 +89,15 @@ char	*ft_parseline(char **buffer)
 	return ((char *)cont);
 }
 
-char	*end_check(char **buffer, char *content, ssize_t bytes)
+char	*end_check(char **buffer, char *content, ssize_t bytes, int *e)
 {
 	if (bytes == 0)
 		ft_free(buffer);
+	*e = 0;
 	return (content);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int *errno)
 {
 	char		*content;
 	ssize_t		bytes;
@@ -104,22 +105,22 @@ char	*get_next_line(int fd)
 
 	bytes = 1;
 	if (fd < 0)
-		return (NULL);
+		return (*errno = -1, NULL);
 	content = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!content)
-		return (ft_free(&buffer), NULL);
+		return (*errno = -1, ft_free(&buffer), NULL);
 	while (!ft_nlcheck(buffer) && bytes != 0)
 	{
 		bytes = read(fd, content, BUFFER_SIZE);
 		if (bytes == -1)
-			return (ft_free(&buffer), ft_free(&content), NULL);
+			return (*errno = -1, ft_free(&buffer), ft_free(&content), NULL);
 		content[bytes] = 0;
 		if (bytes != 0)
 			buffer = ft_buffjoin(&buffer, &content);
 		if (!buffer)
-			return (ft_free(&content), NULL);
+			return (*errno = 0, ft_free(&content), NULL);
 	}
 	ft_free(&content);
-	content = ft_parseline(&buffer);
-	return (end_check(&buffer, content, bytes));
+	content = ft_parseline(&buffer, errno);
+	return (end_check(&buffer, content, bytes, errno));
 }

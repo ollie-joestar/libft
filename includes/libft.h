@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:21:39 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/07/03 15:29:54 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/09/11 15:25:35 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,23 @@ t_list	*ft_lstnew(void *content);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_lstsize(t_list *lst);
 //	Printf
-int	ft_printf(const char *str, ...);
-int	ft_putchar(int c);
-int	ft_putstr(char *s);
-int	ft_putnbr(int nb);
-int	ft_putuint(unsigned int nb);
-int	ft_putptr(unsigned long nb);
-int	ft_puthex(unsigned long n, const char format);
+int		ft_printf(const char *str, ...);
+int		ft_putchar(int c);
+int		ft_putstr(char *s);
+int		ft_putnbr(int nb);
+int		ft_putuint(unsigned int nb);
+int		ft_putptr(unsigned long nb);
+int		ft_puthex(unsigned long n, const char format);
 //	Get next line
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 69
+#  define BUFFER_SIZE 1
 # endif
-char	*get_next_line(int fd);
+
+char	*get_next_line(int fd, int *errno);
 size_t	ft_nlcheck(char const *s);
 char	*ft_buffjoin(char **s1, char **s2);
 void	ft_free(char **something);
 size_t	ft_linelen(char *buffer);
-char	*ft_parseline(char **buffer);
-char	*get_next_line(int fd);
+char	*ft_parseline(char **buffer, int *errno);
 
 #endif

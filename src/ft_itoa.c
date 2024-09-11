@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:11:54 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/07/03 14:49:25 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:18:08 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_itoa(int n)
 
 	size = ft_calc(n);
 	size++;
-	ptr = malloc (size * sizeof(char));
+	ptr = ft_calloc(size, sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	ft_putnbr_itoa(n, ptr);
