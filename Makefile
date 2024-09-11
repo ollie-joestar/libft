@@ -6,7 +6,7 @@
 #    By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/08 13:40:55 by oohnivch          #+#    #+#              #
-#    Updated: 2024/08/29 11:37:04 by oohnivch         ###   ########.fr        #
+#    Updated: 2024/09/11 19:49:36 by oohnivch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #									Variables								   #
@@ -79,9 +79,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 		exit 1; \
 	fi
 
-bonus: $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
-	@echo "\n$(PURPLE)******** $(NAME) with BONUS Created! ********$(NORMAL)\n"
+bonus: $(OBJ_PATH) $(NAME)
 
 clean:
 	@rm -rf $(OBJ_PATH)
