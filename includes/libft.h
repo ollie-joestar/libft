@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:21:39 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/09/11 19:45:20 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:01:50 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 //	Bonus
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *new_node);
+void	ft_lstadd_front(t_list **lst, t_list *new_node);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
@@ -86,11 +86,11 @@ int		ft_puthex(unsigned long n, const char format);
 #  define BUFFER_SIZE 1
 # endif
 
-char	*get_next_line(int fd, int *errno);
+char	*get_next_line(int fd, int *exitcode);
 size_t	ft_nlcheck(char const *s);
 char	*ft_buffjoin(char **s1, char **s2);
 void	ft_free(char **something);
 size_t	ft_linelen(char *buffer);
-char	*ft_parseline(char **buffer, int *errno);
+char	*ft_parseline(char **buffer, int *exitcode);
 
 #endif

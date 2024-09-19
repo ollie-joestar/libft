@@ -6,25 +6,25 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:22:03 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/07/03 14:50:01 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:00:52 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new_node)
 {
 	t_list	*n;
 
-	if (!lst || !new)
+	if (!lst || !new_node)
 		return ;
 	if (!(*lst))
 	{
-		*lst = new;
+		*lst = new_node;
 		return ;
 	}
 	n = (*lst);
 	while (n->next)
 		n = n->next;
-	n->next = new;
+	n->next = new_node;
 }
