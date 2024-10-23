@@ -6,7 +6,7 @@
 /*   By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:21:39 by oohnivch          #+#    #+#             */
-/*   Updated: 2024/09/19 11:01:50 by oohnivch         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:52:25 by oohnivch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		ft_puthex(unsigned long n, const char format);
 # endif
 
 char	*get_next_line(int fd, int *exitcode);
+char	*get_next_line_2(int fd, char **buffer, int *exit_code);
 size_t	ft_nlcheck(char const *s);
 char	*ft_buffjoin(char **s1, char **s2);
 void	ft_free(char **something);

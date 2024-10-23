@@ -6,7 +6,7 @@
 #    By: oohnivch <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/08 13:40:55 by oohnivch          #+#    #+#              #
-#    Updated: 2024/09/11 20:01:18 by oohnivch         ###   ########.fr        #
+#    Updated: 2024/10/23 13:54:17 by oohnivch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #									Variables								   #
@@ -51,7 +51,7 @@ BSRC = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 PSRC = ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c \
 	   ft_puthex.c ft_putptr.c ft_putuint.c
 
-GSRC = get_next_line.c get_next_line_utils.c
+GSRC = get_next_line.c get_next_line_2.c get_next_line_utils.c
 
 SRC =  $(CSRC) $(SSRC) $(MSRC) $(FSRC) $(PSRC) $(GSRC) $(BSRC)
 OBJ =  $(SRC:%.c=%.o)
